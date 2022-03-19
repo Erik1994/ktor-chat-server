@@ -1,15 +1,21 @@
 package com.friendschat
 
+import com.friendschat.di.mainModule
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.friendschat.plugins.*
 import io.ktor.application.*
+import org.koin.ktor.ext.Koin
+import org.koin.ktor.ext.modules
 
 fun main(args: Array<String>): Unit =
     EngineMain.main(args)
 
 @Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
 fun Application.module() {
+    install(Koin) {
+        modules(mainModule)
+    }
     configureSockets()
     configureRouting()
     configureSerialization()
