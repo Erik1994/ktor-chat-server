@@ -13,14 +13,14 @@ class RoomController(
     private val members = ConcurrentHashMap<String, Member>()
 
     fun onJoin(
-        userName: String,
+        username: String,
         sessionId: String,
         socket: WebSocketSession
     ) {
-        if (members.containsKey(userName)) {
+        if (members.containsKey(username)) {
             throw MemberAlreadyExistsException()
         }
-        members[userName] = Member(userName, sessionId, socket)
+        members[username] = Member(username, sessionId, socket)
     }
 
     suspend fun sendMessage(senderUsername: String, message: String) {
@@ -35,10 +35,10 @@ class RoomController(
 
     suspend fun getAllMessages(): List<Message> = messageDataSource.getAllMessages()
 
-    suspend fun tryDisconnect(userName: String) {
-        members[userName]?.socket?.close()
-        if (members.containsKey(userName)) {
-            members.remove(userName)
+    suspend fun tryDisconnect(username: String) {
+        members[username]?.socket?.close()
+        if (members.containsKey(username)) {
+            members.remove(username)
         }
     }
 }

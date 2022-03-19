@@ -3,7 +3,7 @@ package com.friendschat.room
 import io.ktor.http.cio.websocket.*
 
 data class Member (
-    val userName: String,
+    val username: String,
     val sessionId: String,
     val socket: WebSocketSession
 )
