@@ -3,13 +3,16 @@ package com.friendschat
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.friendschat.plugins.*
+import io.ktor.application.*
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-        configureRouting()
-        configureSockets()
-        configureSerialization()
-        configureMonitoring()
-        configureSecurity()
-    }.start(wait = true)
+fun main(args: Array<String>): Unit =
+    EngineMain.main(args)
+
+@Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
+fun Application.module() {
+    configureSockets()
+    configureRouting()
+    configureSerialization()
+    configureMonitoring()
+    configureSecurity()
 }
