@@ -7,7 +7,7 @@ import org.bson.types.ObjectId
 data class Message(
     val text: String,
     val username: String,
-    val timeStamp: Long,
+    val timestamp: Long,
     @BsonId
     val id: String = ObjectId().toString()
 )
